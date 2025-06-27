@@ -12,20 +12,29 @@ export function SearchBar() {
 
   function keyHandler(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Enter') {
-      openSearchPage();
+      openSearchPage(event);
     }
     if (event.key === 'Escape') {
       setSearchText('');
     }
   }
 
-  function openSearchPage(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  function openSearchPage(
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.FormEvent<HTMLFormElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) {
     e.preventDefault();
     navigate(`/search/${searchText}`); // Navigate to /dashboard
   }
 
   return (
-    <div id="search" className="flex gap-5 w-full ">
+    <form
+      onSubmit={e => openSearchPage(e)}
+      id="search-form"
+      className="flex gap-5 w-full "
+    >
       <input
         type="text"
         value={searchText}
@@ -43,6 +52,6 @@ export function SearchBar() {
       >
         <MagnifyingGlassIcon className="size-6 text-blue-600 dark:text-blue-200" />
       </button>
-    </div>
+    </form>
   );
 }
