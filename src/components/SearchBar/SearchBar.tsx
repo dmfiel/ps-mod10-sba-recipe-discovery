@@ -19,7 +19,8 @@ export function SearchBar() {
     }
   }
 
-  function openSearchPage() {
+  function openSearchPage(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
     navigate(`/search/${searchText}`); // Navigate to /dashboard
   }
 
@@ -38,7 +39,7 @@ export function SearchBar() {
         id="search"
         type="submit"
         className="bg-blue-300 hover:bg-blue-400 focus:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600 dark:focus:bg-blue-600 px-3 rounded-md"
-        onClick={() => openSearchPage()}
+        onClick={e => openSearchPage(e)}
       >
         <MagnifyingGlassIcon className="size-6 text-blue-600 dark:text-blue-200" />
       </button>
